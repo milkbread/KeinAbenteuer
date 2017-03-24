@@ -8,27 +8,69 @@
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <h2 class="modal-title" id="myModalLabel">Anmeldung</h2>
+
 </div>
 <div class="modal-body">
-    <div class="row">
-        <div class="col-md-12">
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Login</button>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p><strong>-- ODER --</strong></p>
-            <a href="{% url 'social:begin' 'google-oauth2' %}?next=/">mit Google</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p><strong>-- ODER --</strong></p>
-            <a href="{% url 'social:begin' 'twitter' %}">mit Twitter</a>
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <ul class="nav nav-tabs">
+                <li><a href="#login" data-toggle="tab">Login</a></li>
+                <li><a href="#sociallogin" data-toggle="tab">via Social Media</a></li>
+                <li><a href="#signup" data-toggle="tab">Registrieren</a></li>
+                <li><a href="#forgotpassword" data-toggle="tab">Passwort vergessen</a></li>
+            </ul>
+            </br>
+            <div class="tab-content">
+                <div class="tab-pane active" id="login">
+                    <form method="post" action="/login/">
+                        {% csrf_token %}
+                        <p>
+                            <label for="id_username">Benutzername:</label>
+                            <input autofocus="" id="id_username" maxlength="254" name="username" type="text" required="">
+                        </p>
+                        <p>
+                            <label for="id_password">Passwort:</label>
+                            <input id="id_password" name="password" type="password" required="">
+                        </p>
+                        <button type="submit" class="btn btn-primary">Einloggen</button>
+                        jetzt kostenlos <a href="#signup" data-toggle="tab">anmelden</a>
+                        oder <a href="#forgotpassword" data-toggle="tab">Passwort vergessen?</a>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="signup">
+                    <form method="post" action="/signup/">
+                        {% csrf_token %}
+                        <p>
+                            <label for="id_username">Benutzername:</label>
+                            <input autofocus="" id="id_username" maxlength="150" name="username" type="text" required="">
+                            <span class="helptext">Erforderlich. 150 Zeichen oder weniger. Nur Buchstaben, Ziffern und @/./+/-/_.</span>
+                        </p>
+                        <p>
+                            <label for="id_password1">Passwort:</label>
+                            <input id="id_password1" name="password1" type="password" required="">
+                        </p>
+                        <p>
+                            <label for="id_password2">Passwort bestätigen:</label>
+                            <input id="id_password2" name="password2" type="password" required="">
+                                <span class="helptext">Bitte das selbe Passwort zur Bestätigung erneut eingeben.</span>
+                            </p>
+                        <button type="submit" class="btn btn-primary">Anmelden</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="forgotpassword">
+                    <form method="post" action='' name="forgot_password">
+                        <p>Das kann jedem mal passieren! Dann beantrage ein neues!</p>
+                        <input type="text" class="span12" name="eid" id="email" placeholder="Email">
+                        <p><button type="submit" class="btn btn-primary">Senden</button>
+                        </p>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="sociallogin">
+                    <a href="{% url 'social:begin' 'google-oauth2' %}?next=/">mit Google</a>
+                    <p><strong>-- ODER --</strong></p>
+                    <a href="{% url 'social:begin' 'twitter' %}">mit Twitter</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
