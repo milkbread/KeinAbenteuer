@@ -1,7 +1,8 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
+from .forms import UserCreateForm
 
 
 def home(request):
@@ -23,3 +24,7 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/login.html', {'form': form})
+
+def json_signup(request):
+    if request.method == 'POST':
+        return UserCreateForm(data=request.POST).save()
