@@ -17,23 +17,27 @@
         <div class="span10 offset1">
             <ul class="nav nav-tabs">
                 <li><a href="#login" data-toggle="tab">Login</a></li>
-                <li><a href="#sociallogin" data-toggle="tab">via Social Media</a></li>
-                <li><a href="#signup" data-toggle="tab">Registrieren</a></li>
+                <li><a href="#sociallogin" data-toggle="tab">Social Media</a></li>
                 <li><a href="#forgotpassword" data-toggle="tab">Passwort vergessen</a></li>
+                <li><a href="#signup" data-toggle="tab">Registrieren</a></li>
             </ul>
             </br>
             <div class="tab-content">
                 <div class="tab-pane active" id="login">
                     <form method="post" action="/login/">
                         {% csrf_token %}
-                        <p>
-                            <label for="id_username">Benutzername:</label>
-                            <input autofocus="" id="id_username" maxlength="254" name="username" type="text" required="">
-                        </p>
-                        <p>
-                            <label for="id_password">Passwort:</label>
-                            <input id="id_password" name="password" type="password" required="">
-                        </p>
+                        <div class="row form-group">
+                            <label class="col-md-3 control-label" for="id_username">Benutzername:</label>
+                            <div class="col-md-6">
+                                <input class="form-control input-md" autofocus="" id="id_username" maxlength="254" name="username" type="text" required="">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label class="col-md-3 control-label" for="id_password">Benutzername:</label>
+                            <div class="col-md-6">
+                                <input class="form-control input-md" autofocus="" id="id_password" name="password" type="password" required="">
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary">Einloggen</button>
                         jetzt kostenlos <a href="#signup" data-toggle="tab">anmelden</a>
                         oder <a href="#forgotpassword" data-toggle="tab">Passwort vergessen?</a>
@@ -91,22 +95,33 @@
                 </div>
                 <div class="tab-pane fade" id="forgotpassword">
                     <form method="post" action='' name="forgot_password">
-                        <p>Das kann jedem mal passieren! Dann beantrage ein neues!</p>
-                        <input type="text" class="span12" name="eid" id="email" placeholder="Email">
-                        <p><button type="submit" class="btn btn-primary">Senden</button>
-                        </p>
+                        <div class="row form-group">
+                            <label for="first_name" class="col-md-6 control-label">Neues Passwort beantragen:</label>
+                            <div class="col-md-6">
+                                <input type="text" name="eid" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Senden</button>
                     </form>
                 </div>
                 <div class="tab-pane fade" id="sociallogin">
-                    <a href="{% url 'social:begin' 'google-oauth2' %}?next=/">mit Google</a>
-                    <p><strong>-- ODER --</strong></p>
-                    <a href="{% url 'social:begin' 'twitter' %}">mit Twitter</a>
+                    <a class="btn btn-block btn-social btn-google" href="{% url 'social:begin' 'google-oauth2' %}?next=/">
+                      <span class="fa fa-google"></span> Melde dich mit Google an
+                    </a>
+                    <p></p>
+                    <a class="btn btn-block btn-social btn-twitter">
+                      <span class="fa fa-twitter" href="{% url 'social:begin' 'twitter' %}"></span> Melde dich mit Twitter an
+                    </a>
+                    <p></p>
+                    <a class="btn btn-block btn-social btn-facebook">
+                      <span class="fa fa-facebook" href="{% url 'social:begin' 'facebook' %}"></span> Melde dich mit Facebook an
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+  <button type="button" class="btn btn-primary" data-dismiss="modal">Schließen</button>
 </div>
 {% endblock %}
