@@ -1,0 +1,14 @@
+{% extends 'core/master.html' %}
+{% load static %}
+
+{% block title %}
+Beitrag
+{% endblock%}
+
+{% block body %}
+	<h1>Beitrag hinzufügen</h1>
+	<form method="POST" class="article-form">{% csrf_token %}
+	    {{ form.as_p }}
+	    <button type="submit" class="save btn btn-default">Speichern</button>
+	</form>
+{% endblock%}

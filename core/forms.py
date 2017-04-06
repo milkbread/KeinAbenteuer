@@ -4,6 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import EmailValidator
 from django.http import JsonResponse
 
+from .models import Article
+
+
 class UserCreateForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
@@ -24,3 +27,10 @@ class UserCreateForm(UserCreationForm):
         else:
             response['errors'] = form.errors
             return JsonResponse(response)
+
+
+class ArticleForm(forms.ModelForm):
+
+    class Meta:
+        model = Article
+        fields = ('title', 'text', 'published_date')
