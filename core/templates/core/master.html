@@ -54,11 +54,12 @@
                         <li>
                             <a href="#">Link</a>
                         </li>
+                        {% if user.is_authenticated %}
                         <li class="dropdown">
-                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Beitr&auml;ge<strong class="caret"></strong></a>
+                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{% url 'article_new' %}" class="top-menu">Hinzufügen</a>
+                                    <a href="#" class="top-menu">Content</a>
                                 </li>
                                 <li>
                                     <a href="#">...</a>
@@ -69,7 +70,7 @@
                                 <li class="divider">
                                 </li>
                                 <li>
-                                    <a href="/articles" class="top-menu">Eigene Beiträge</a>
+                                    <a href="#" class="top-menu">...</a>
                                 </li>
                                 <li class="divider">
                                 </li>
@@ -78,6 +79,7 @@
                                 </li>
                             </ul>
                         </li>
+                        {% endif %}
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
@@ -101,6 +103,13 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="#">Profil</a>
+                                </li>
+                                <li class="divider">
+                                <li>
+                                    <a href="{% url 'article_new' %}">Beitrag hinzufügen</a>
+                                </li>
+                                <li>
+                                    <a href="/articles">Eigene Beiträge</a>
                                 </li>
                                 <li class="divider">
                                 </li>

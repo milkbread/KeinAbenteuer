@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class Article(models.Model):
@@ -18,7 +19,14 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
-class ArticleImage(models.Model):
-    article = models.ForeignKey('Article')
-    img = models.ImageField(upload_to = 'pic_folder')
-    
+
+def get_image_filename(instance, filename):
+    title = instance.article.title
+    slug = slugify(title)
+    return "posted_images/%s-%s" % (slug, filename)  
+
+
+class Image(models.Model):
+    article = models.ForeignKey(Article, default=None, related_name="images")
+    image = models.ImageField(upload_to=get_image_filename,
+                              verbose_name='Image', )

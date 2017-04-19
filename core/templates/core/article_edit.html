@@ -7,8 +7,14 @@ Beitrag
 
 {% block body %}
 	<h1>Beitrag hinzufügen</h1>
-	<form method="POST" class="article-form">{% csrf_token %}
+	<form method="POST" class="article-form" enctype="multipart/form-data">{% csrf_token %}
 	    {{ form.as_p }}
+
+	    {{ formset.management_form }}
+	    {% for form in formset %}
+	        {{ form }}
+	    {% endfor %}
+
 	    <button type="submit" class="save btn btn-default">Speichern</button>
 	</form>
 {% endblock%}

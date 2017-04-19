@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import EmailValidator
 from django.http import JsonResponse
 
-from .models import Article
+from .models import Article, Image
 
 
 class UserCreateForm(UserCreationForm):
@@ -34,3 +34,9 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ('title', 'text', 'published_date')
+
+class ImageForm(forms.ModelForm):
+    image = forms.ImageField(label='Image')    
+    class Meta:
+        model = Image
+        fields = ('image', )
